@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Boku.Models;
+using Raven.Client;
 
 namespace Boku.Web.Controllers
 {
@@ -13,6 +14,12 @@ namespace Boku.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IDocumentSession _documentSession;
+
+        public AccountController(IDocumentSession documentSession)
+        {
+            _documentSession = documentSession;
+        }
 
         //
         // GET: /Account/Login
@@ -141,7 +148,10 @@ namespace Boku.Web.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    //FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+
+                    _documentSession.Store(model);
+                    _documentSession.SaveChanges();
 
                     RedirectToAction("Post", "Accounts", model);
                     

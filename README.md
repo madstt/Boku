@@ -1,0 +1,1 @@
+Boku is the kitchen organizer, the digital kitchen. Its meant as a meeting place for individuals to exchange recipes, kitchen best practices, shopping lists, etc.

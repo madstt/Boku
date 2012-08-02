@@ -9,9 +9,8 @@
     <h2>Enter your user name and password below.</h2>
 </hgroup>
 
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
+@Scripts.Render("~/bundles/jqueryval")
+s
 @using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
     @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
 
