@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Griffin.MvcContrib">
+      <HintPath>..\packages\griffin.mvccontrib.1.1.0\lib\net40\Griffin.MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Griffin.MvcContrib.RavenDb">
+      <HintPath>..\packages\Griffin.MvcContrib.RavenDb.1.0.4\lib\net40\Griffin.MvcContrib.RavenDb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -163,6 +169,8 @@
     <Compile Include="RavenDB\RavenDBModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_ReadMe\Griffin.MvcContrib.RavenDb.txt" />
+    <Content Include="App_ReadMe\Griffin.MvcContrib.txt" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

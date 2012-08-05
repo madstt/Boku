@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Griffin.MvcContrib">
+      <HintPath>..\packages\griffin.mvccontrib.1.1.0\lib\net40\Griffin.MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Griffin.MvcContrib.RavenDb">
+      <HintPath>..\packages\Griffin.MvcContrib.RavenDb.1.0.4\lib\net40\Griffin.MvcContrib.RavenDb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -102,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="App_ReadMe\Griffin.MvcContrib.RavenDb.txt" />
+    <Content Include="App_ReadMe\Griffin.MvcContrib.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
