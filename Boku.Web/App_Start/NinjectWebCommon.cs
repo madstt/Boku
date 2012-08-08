@@ -1,3 +1,5 @@
+using Boku.Web.NinjectModules;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Boku.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Boku.Web.App_Start.NinjectWebCommon), "Stop")]
 
@@ -5,7 +7,6 @@ namespace Boku.Web.App_Start
 {
     using System;
     using System.Web;
-    using Boku.Web.RavenDB;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
@@ -53,8 +54,7 @@ namespace Boku.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Load(new RavenDBModule());
-
-            
+            kernel.Load(new AccountModule());
         }        
     }
 }

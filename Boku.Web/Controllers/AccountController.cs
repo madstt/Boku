@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Boku.Models;
+using Boku.Web.Security;
 using Raven.Client;
 
 namespace Boku.Web.Controllers
@@ -15,10 +14,30 @@ namespace Boku.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IDocumentSession _documentSession;
+        private readonly IMembershipService _membershipService;
+        private readonly IFormsAuthenticationService _formsAuthenticationService;
 
-        public AccountController(IDocumentSession documentSession)
+        public AccountController(IDocumentSession documentSession, IMembershipService membershipService, IFormsAuthenticationService formsAuthenticationService)
         {
+            // Guard clauses
+            if (documentSession == null)
+            {
+                throw new ArgumentNullException("documentSession", "DocumentSession is null.");
+            }
+
+            if (membershipService == null)
+            {
+                throw new ArgumentNullException("membershipService", "MembershipService is null.");
+            }
+
+            if (formsAuthenticationService == null)
+            {
+                throw new ArgumentNullException("formsAuthenticationService", "FormsAuthenticationService is null.");
+            }
+
             _documentSession = documentSession;
+            _membershipService = membershipService;
+            _formsAuthenticationService = formsAuthenticationService;
         }
 
         //
@@ -41,7 +60,7 @@ namespace Boku.Web.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -63,9 +82,9 @@ namespace Boku.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (_membershipService.ValidateUser(model.UserName, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -115,11 +134,11 @@ namespace Boku.Web.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                _membershipService.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    _formsAuthenticationService.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     RedirectToAction("POST", "Accounts");
                     return Json(new { success = true });
                 }
@@ -144,11 +163,11 @@ namespace Boku.Web.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                _membershipService.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    //FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    _formsAuthenticationService.SetAuthCookie(model.UserName, createPersistentCookie: false);
 
                     _documentSession.Store(model);
                     _documentSession.SaveChanges();
@@ -189,7 +208,7 @@ namespace Boku.Web.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
+                    MembershipUser currentUser = _membershipService.GetUser(User.Identity.Name, userIsOnline: true);
                     changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 }
                 catch (Exception)

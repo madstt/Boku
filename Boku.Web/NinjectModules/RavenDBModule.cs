@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Griffin.MvcContrib.Providers.Membership;
+﻿using Griffin.MvcContrib.Providers.Membership;
 using Griffin.MvcContrib.Providers.Membership.PasswordStrategies;
 using Griffin.MvcContrib.RavenDb.Providers;
 using Ninject;
@@ -12,7 +8,7 @@ using Ninject.Web.Common;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace Boku.Web.RavenDB
+namespace Boku.Web.NinjectModules
 {
     public class RavenDBModule : NinjectModule
     {
