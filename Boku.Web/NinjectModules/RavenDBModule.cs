@@ -29,8 +29,7 @@ namespace Boku.Web.NinjectModules
 
         private IDocumentStore InitDocStore(IContext context)
         {
-            DocumentStore ds = new DocumentStore { ConnectionStringName = "CloudBird" };
-            // also good to setup the glimpse plugin here            
+            var ds = new DocumentStore { ConnectionStringName = "CloudBird" };
             ds.Initialize();
             return ds;
         }

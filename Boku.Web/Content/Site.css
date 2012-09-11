@@ -1,5 +1,7 @@
 ﻿body {
-	background: #f2f2f2;
+	/*background-image:url(../Images/teal-floral-print-fabric-texture-600x400.jpg);*/
+    background: #f2f2f2;
+    background-attachment:fixed;
 	color: #222;
 	cursor: default;
 	font-family: Helvetica, Arial, sans-serif;
@@ -74,9 +76,6 @@ h6 {
 #header {
 	border-bottom: 1px solid #198ecf;
 	border-top: 1px solid #198ecf;
-}
-
-#header {
 	background: #0075b5;
 	height: 42px;
 	margin: 0 0 40px;
@@ -85,6 +84,20 @@ h6 {
 	-webkit-box-shadow: 0 1px 3px #444;
 	-khtml-box-shadow: 0 1px 3px #444;
 	box-shadow: 0 1px 3px #444;
+}
+
+#content-header
+{
+    border-bottom: 1px solid #198ecf;
+    border-top: 1px solid #198ecf;
+    background: #0075b5;
+    height: 42px;
+    margin: 0 0 0px;
+    -moz-box-shadow: 0 1px 3px #444;
+    -o-box-shadow: 0 1px 3px #444;
+    -webkit-box-shadow: 0 1px 3px #444;
+    -khtml-box-shadow: 0 1px 3px #444;
+    border-radius: 15px;
 }
 
 .middle {
@@ -140,6 +153,21 @@ opacity: .80;
 	color: #fff;
 }
 
+#content-header h1 a:hover {
+/*-moz-box-shadow: 0 1px 2px #333;*/
+-moz-opacity:.80;
+filter: alpha(opacity=80);
+opacity: .80;
+}
+
+#content-header a {
+	color: #e2f5ff;
+}
+
+#content-header a:hover {
+	color: #fff;
+}
+
 /* Menu styles*/
 #menu {
 	-moz-text-shadow: 0 1px 0 #00466c;
@@ -150,7 +178,7 @@ opacity: .80;
 }
 
 #menu {
-	padding: 0 0 0 140px;
+	padding: 0 0 0 0;
 }
 
 #menu li {
@@ -195,9 +223,18 @@ opacity: .80;
 	_background-image: url(../images/gravatar-sprite-ie6.png?=2) !important;*/
 	background-position: 100% -86px;
 	float: left;
-	padding-right: 30px;
+	padding-right: 15px;
 	position: relative;
 	z-index: 101;
+}
+
+#menu .submenu_link_content {
+	background-position: 100% -86px;
+	float: left;
+	padding-right: 15px;
+	position: relative;
+	z-index: 101;
+    border-radius: 15px;
 }
 
 #menu .menupop.open .submenu_link,
@@ -225,7 +262,7 @@ opacity: .80;
 
 #help.menupop {
 	float: right;
-	margin: 0 -12px 0 0;
+	margin: 0 0 0 0;
 }
 
 #help.menupop .submenu {
@@ -264,6 +301,7 @@ opacity: .80;
 /* Welcome message */
 
 #menu #welcome {
+    float: right;
 	color: #e2f5ff;
 	margin: 0 20px 0 0;
 }
@@ -273,6 +311,13 @@ opacity: .80;
 background: none !important;
 display: inline;
 padding: 0;
+}
+
+/* Login */
+
+#login.menupop {
+    float: right;
+    margin: 0 0 0 0;
 }
 
 /* !# Main */
@@ -338,11 +383,12 @@ padding: 0;
     background: -webkit-gradient(linear, left top, left bottom, from(white), to(#f2f2f2));
 }
 
-.box {
-	/*background: url(../images/gravatar-horizontal-sprite.png) repeat-y;*/
+.box
+{
+    /*background: url(../images/gravatar-horizontal-sprite.png) repeat-y;*/
     background: white;
-	padding: 10px 37px 10px;
-	min-height: 260px;
+    padding: 0px 0px 10px;
+    min-height: 260px;
 }
 
 /* !# Footer */
@@ -598,5 +644,19 @@ a.button_large {
 
 .column-right_large.current {
 	display: block;
+}
+
+/* Content menus */
+
+#global-submenu {
+  /*background-image:url(http://www.jamieoliver.com/globalNav/img/global-sub-menu-background.jpg);*/
+  border-top-color:#DEDDDD;
+  border-top-style:solid;
+  border-top-width:1px;
+  float:left;
+  height:28px;
+  margin-top:-1px;
+  padding-bottom:10px;
+  width:935px;
 }
 

@@ -1,0 +1,14 @@
+﻿@if(Request.IsAuthenticated)
+{
+    <a href="/account/logoff" class="submenu_link">Log ud</a>
+}
+else
+{
+    <a href="/account/login/" class="submenu_link">Log ind / Opret Bruger</a>
+    <ul class="submenu">
+        <li><a href="/account/login/%2F">Log Ind</a></li>
+        <li><a href="/account/register">Opret Bruger</a></li>
+        <li><a href="/account/changepassword">Reset Password</a></li>
+    </ul>
+}
+
