@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using Boku.Models;
+using Boku.Web.Models;
 using Boku.Web.Security;
 using Raven.Client;
 
@@ -96,7 +101,7 @@ namespace Boku.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", "");
                 }
             }
 
@@ -168,6 +173,9 @@ namespace Boku.Web.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     _formsAuthenticationService.SetAuthCookie(model.UserName, createPersistentCookie: false);
+
+                    var emailInMD5 = convertEmailtoMD5(model.Email);
+                    model.Image = new Uri(string.Format("{0}{1}?s={2}", ConfigurationManager.AppSettings["GravatarUrl"], emailInMD5, ConfigurationManager.AppSettings["GravatarImageSize"]));
 
                     _documentSession.Store(model);
                     _documentSession.SaveChanges();
@@ -297,5 +305,21 @@ namespace Boku.Web.Controllers
             }
         }
         #endregion
+
+        private string convertEmailtoMD5(string email)
+        {
+            // step 1, calculate MD5 hash from input
+            var md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(email);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            var sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
     }
 }

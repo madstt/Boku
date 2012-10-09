@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>boku - Opskrifter og meget mere</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        @Styles.Render("~/Content/css", "~/Content/themes/base/css")
-        @Scripts.Render("~/bundles/jquery", "~/bundles/specific")
-        <meta name="viewport" content="width=device-width" />
-    </head>
-    <body>
-        <div id="wrap">
-            <div id="header">
-                <div class="middle">
-                <h1><a href="/" title="Home">boku</a></h1>
-                    <ul id="menu">
-                        <li class="menupop" id="help">
-                            <a href="/site/faq/" class="submenu_link">Hjælp</a>
-                            <ul class="submenu"> 
-                                <li><a href="/">Om boku</a></li>
-                                @*<li><a href="/site/faq/">Common Questions</a></li>*@
-                                @*			                        <li><a href="/site/implement/">Developer Resources</a></li>
-			                    <li><a href="http://blog.gravatar.com/">Read Our Blog</a></li>
-			                    <li><a href="http://automattic.com/privacy/">Privacy Policy</a></li>
-			                    <li><a href="/site/terms-of-service/">Terms of Service</a></li>
-			                    <li><a href="/site/abuse/">Report Abuse</a></li>
-*@		                        </ul>
-                        </li>
-                        <li class="menupop" id="login">
-                            @Html.Partial("_UserMenu")
-                        </li>
-                        <li class="menupop" id="welcome">
+<head>
+    <meta charset="utf-8" />
+    <title>boku - Opskrifter og meget mere</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Be sure to leave the brand out there if you want it shown -->
+                    <a class="brand" href="#">boku</a>
+
+                    <!-- Everything you want hidden at 940px or less, place within here -->
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
                             @Html.Partial("_LoginPartial")
-                        </li>  
-                    </ul>
+                            @Html.Partial("_UserMenu")
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hjælp<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Om Boku</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-            </div>
-            <div id="overlay" style="display: none; height: 1208px; width: 1583px; "></div>
-            <div id="main">
-                <div class="middle">
-                    <div class="box-top"></div>
-                        <div class="box">
-                            <div class="content">
-                                @RenderSection("featured", required: false)
-                                <section class="content-wrapper main-content clear-fix">
-                                    @RenderBody()
-                                </section>
-                            </div>
-                        </div>
-                    <div class="box-bottom"></div>
                 </div>
             </div>
-            <div id="footer">
-
+        </div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<footer>
+    <div class="container">
+        <ul class="nav nav-list">
+            <li class="divider"></li>
+        </ul>
+        <div class="row" style="text-align: center">
+            <div class="span12">
+                <ol class="row-fluid">
+                    <li class="span12">boku ©2012 by Mads <a href="madstt.dk">madstt.dk</a></li>
+                </ol>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</footer>

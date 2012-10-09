@@ -1,10 +1,10 @@
-@model Boku.Models.RegisterModel
+@model Boku.Web.Models.RegisterModel
 
 @{
     ViewBag.Title = "Boku - Opret Bruger";
 }
 
-<h2>Opret ny Boku bruger</h2>
+<h2>Opret ny boku bruger</h2>
 
 <p>
     Passwords skal minimum være @Membership.MinRequiredPasswordLength karakterer.
@@ -12,30 +12,43 @@
 
 @Scripts.Render("~/bundles/jqueryval")
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post)) {
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
     @Html.ValidationSummary(true, "Oprettelse mislykkedes. Ret fejlene og prøv igen.")
 
-    <p>
-        @Html.LabelFor(m => m.UserName)
-        @Html.TextBoxFor(m => m.UserName)
+    <div class="control-group">
+        <label class="control-label" for="UserName">@Html.LabelFor(m => m.UserName)</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.UserName)
+        </div>
         @Html.ValidationMessageFor(m => m.UserName)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email)
-        @Html.ValidationMessageFor(m => m.Email)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password)
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="Email">@Html.LabelFor(m => m.Email)</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Email)
+        </div>
         @Html.ValidationMessageFor(m => m.Password)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.ConfirmPassword)
-        @Html.PasswordFor(m => m.ConfirmPassword)
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="Password">@Html.LabelFor(m => m.Password)</label>
+        <div class="controls">
+            @Html.PasswordFor(m => m.Password)
+        </div>
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="ConfirmPassword">@Html.LabelFor(m => m.ConfirmPassword)</label>
+        <div class="controls">
+            @Html.PasswordFor(m => m.ConfirmPassword)
+        </div>
         @Html.ValidationMessageFor(m => m.ConfirmPassword)
-    </p>
-    <p class="label-align">
-        <input class="button" name="commit" type="submit" value="Opret" />
-    </p>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <p class="label-align">
+            <input class="button" type="submit" value="Opret"/>
+            </p>
+        </div>
+    </div>
 }

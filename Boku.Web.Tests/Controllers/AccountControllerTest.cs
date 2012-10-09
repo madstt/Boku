@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Security;
 using Boku.Models;
 using Boku.Web.Controllers;
+using Boku.Web.Models;
 using Boku.Web.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Boku.Models;
 
-namespace Boku.Models
+namespace Boku.Web.Models
 {
 
     public class ChangePasswordModel
@@ -58,5 +60,8 @@ namespace Boku.Models
         [Display(Name = "Bekræft password:")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Url)]
+        public Uri Image { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-@model Boku.Models.LoginModel
+@model Boku.Web.Models.LoginModel
 
 @{
     ViewBag.Title = "Boku - Log ind";
@@ -6,11 +6,39 @@
 
 <h2>Log ind</h2>
 
-<p>Indtast brugernavn og password.</p>
+<p class="lead">Indtast brugernavn og password.</p>
 
 @Scripts.Render("~/bundles/jqueryval")
 
 @using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
+    @Html.ValidationSummary(true, "Log ind mislykkedes. Ret fejlene og prøv igen.")
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">@Html.LabelFor(m => m.UserName)</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.UserName)
+        </div>
+        @Html.ValidationMessageFor(m => m.UserName)
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">@Html.LabelFor(m => m.Password)</label>
+        <div class="controls">
+            @Html.PasswordFor(m => m.Password)
+        </div>
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox"> @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </label>
+            <input class="button" type="submit" value="Log ind"/>
+            <p>
+                @Html.ActionLink("Opret bruger ", "Register") hvis du ikke har en profil.
+            </p>
+        </div>
+    </div>
+}
+@*@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
     @Html.ValidationSummary(true, "Log ind mislykkedes. Ret fejlene og prøv igen.")
 
     <p>
@@ -31,5 +59,4 @@
         <input class="button" type="submit" value="Log ind" /></p>
     <p>
         @Html.ActionLink("Opret bruger", "Register") hvis du ikke har en profil.
-    </p>
-}
+    </p>*@
