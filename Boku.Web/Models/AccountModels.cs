@@ -37,6 +37,9 @@ namespace Boku.Web.Models
 
         [Display(Name = "Husk mig?")]
         public bool RememberMe { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
     }
 
     public class RegisterModel : IRegisterModel

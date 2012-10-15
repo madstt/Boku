@@ -5,20 +5,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boku.Web", "Boku.Web\Boku.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boku.Web.Tests", "Boku.Web.Tests\Boku.Web.Tests.csproj", "{05C53AAC-FC66-4887-900A-AF6769C884FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B27DF365-FCAF-485B-B781-926A1BBF4DCD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16852C38-B32A-4EF5-9BC1-D57F0B335DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16852C38-B32A-4EF5-9BC1-D57F0B335DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16852C38-B32A-4EF5-9BC1-D57F0B335DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16852C38-B32A-4EF5-9BC1-D57F0B335DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C53AAC-FC66-4887-900A-AF6769C884FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

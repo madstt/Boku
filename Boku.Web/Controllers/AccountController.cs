@@ -90,14 +90,16 @@ namespace Boku.Web.Controllers
                 if (_membershipService.ValidateUser(model.UserName, model.Password))
                 {
                     _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
+
+                    var user = _membershipService.GetUser(model.UserName, userIsOnline: true);
+                    model.Email = user.Email;
+
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+
+                    return RedirectToAction("Login", "Home", model);
                 }
                 else
                 {

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Boku.Web.Models;
 
 namespace Boku.Web.Controllers
 {
@@ -9,6 +10,11 @@ namespace Boku.Web.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View();
+        }
+
+        public ActionResult Login(LoginModel loginModel)
+        {
+            return View("Index", loginModel);
         }
 
         public ActionResult About()
