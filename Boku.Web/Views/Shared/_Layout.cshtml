@@ -12,30 +12,49 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-        <div class="navbar navbar-static-top" style="padding-bottom: 50px">
+    <div class="navbar navbar-static-top" style="padding-bottom: 50px">
+        <div class="navbar-inner">
+            <div class="container">
+                <!-- Be sure to leave the brand out there if you want it shown -->
+                <a class="brand" href="#">boku</a>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        @Html.Partial("_LoginPartial")
+                        @Html.Partial("_UserMenu")
+                        <li class="divider-vertical"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hjælp<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Om Boku</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
-                    <!-- Be sure to leave the brand out there if you want it shown -->
-                    <a class="brand" href="#">boku</a>
-
-                    <!-- Everything you want hidden at 940px or less, place within here -->
                     <div class="nav-collapse">
-                        <ul class="nav pull-right">
-                            @Html.Partial("_LoginPartial")
-                            @Html.Partial("_UserMenu")
+                        <ul class="nav">
+                            <li>
+                                @Html.ActionLink("Opskrifter", "Index", "Recipes")
+                            </li>
                             <li class="divider-vertical"></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hjælp<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Om Boku</a></li>
-                                </ul>
+                            <li>
+                                @Html.ActionLink("Madplaner", "Index", "Plans")
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    @RenderBody()
+        @RenderBody()    
+    </div>
     @RenderSection("scripts", required: false)
 </body>
 </html>

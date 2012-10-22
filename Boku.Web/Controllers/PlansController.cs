@@ -2,15 +2,11 @@
 
 namespace Boku.Web.Controllers
 {
-    public class RecipesController : Controller
+    public class PlansController : Controller
     {
-        //
-        // GET: /Recipes/
-
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
