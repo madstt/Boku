@@ -1,18 +1,18 @@
 ﻿using System.Web.Mvc;
-using Boku.Web.Models;
+using Boku.DomainLogicLayer;
+using Boku.DomainLogicLayer.AccountModels;
 
 namespace Boku.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
             return View();
         }
 
-        public ActionResult Login(LoginModel loginModel)
+        public ActionResult Login(User loginModel)
         {
             return View("Index", loginModel);
         }

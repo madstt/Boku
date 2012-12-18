@@ -1,5 +1,4 @@
-@model Boku.Web.Models.LoginModel
-
+@model Boku.DomainLogicLayer.AccountModels.User
 @{
     ViewBag.Title = "Boku - Log ind";
 }
@@ -28,9 +27,9 @@
     </div>
     <div class="control-group">
         <div class="controls">
-            <label class="checkbox">
+@*            <label class="checkbox">
                 <input type="checkbox"> @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </label>
+            </label>*@
             <input class="button" type="submit" value="Log ind"/>
             <p>
                 @Html.ActionLink("Opret bruger ", "Register") hvis du ikke har en profil.

@@ -2,7 +2,7 @@
 
 namespace Boku.Web.Controllers
 {
-    public class PlansController : Controller
+    public class PlansController : BaseController
     {
         public ActionResult Index()
         {

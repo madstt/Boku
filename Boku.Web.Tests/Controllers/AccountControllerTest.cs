@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Security;
-using Boku.Models;
+using Boku.DomainLogicLayer;
+using Boku.DomainLogicLayer.AccountModels;
 using Boku.Web.Controllers;
-using Boku.Web.Models;
 using Boku.Web.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -42,12 +41,11 @@ namespace Boku.Web.Tests.Controllers
         public void Register_Positive_Test()
         {
             // Arrange
-            var registerModel = new RegisterModel
+            var registerModel = new User
                 {
                     UserName = "TestUser",
                     Email = "TestEmail",
                     Password = "TestPassword",
-                    ConfirmPassword = "TestPassword"
                 };
 
             MembershipCreateStatus outParam;
@@ -61,7 +59,7 @@ namespace Boku.Web.Tests.Controllers
             accountController.Register(registerModel);
 
             // Assert
-            var res = documentSession.Query<RegisterModel>().Where(x => x.UserName == "TestUser").ToList();
+            var res = documentSession.Query<User>().Where(x => x.UserName == "TestUser").ToList();
 
             Assert.IsTrue(res.Count == 1);
             Assert.IsTrue(res[0].UserName == "TestUser");
@@ -72,12 +70,11 @@ namespace Boku.Web.Tests.Controllers
         {
             // Arrange
 
-            var registerModel = new RegisterModel
+            var registerModel = new User
             {
                 UserName = "TestUser",
                 Email = "TestEmail",
                 Password = "TestPassword",
-                ConfirmPassword = "TestPassword"
             };
 
             MembershipCreateStatus outParam = MembershipCreateStatus.Success;

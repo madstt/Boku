@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using Boku.Interfaces;
 
-namespace Boku.DomainLogicLayer
+namespace Boku.DomainLogicLayer.DomainModels
 {
-    public class RecipeModel : IModel
+    public class RecipeModel
     {
         public int Id { get; set; }
 

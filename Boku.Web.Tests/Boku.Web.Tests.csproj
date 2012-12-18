@@ -158,6 +158,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Boku.DomainLogicLayer\Boku.DomainLogicLayer.csproj">
+      <Project>{CCC8B65F-3A15-4229-909D-E4EAA5C8CCB1}</Project>
+      <Name>Boku.DomainLogicLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Boku.Web\Boku.Web.csproj">
       <Project>{16852C38-B32A-4EF5-9BC1-D57F0B335DB9}</Project>
       <Name>Boku.Web</Name>

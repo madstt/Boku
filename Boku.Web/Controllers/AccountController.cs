@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
-using Boku.Models;
-using Boku.Web.Models;
+using Boku.DomainLogicLayer.AccountModels;
 using Boku.Web.Security;
 using Raven.Client;
 
 namespace Boku.Web.Controllers
 {
-
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IDocumentSession _documentSession;
         private readonly IMembershipService _membershipService;
@@ -59,13 +53,13 @@ namespace Boku.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public JsonResult JsonLogin(LoginModel model, string returnUrl)
+        public JsonResult JsonLogin(User model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
+//                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -83,16 +77,19 @@ namespace Boku.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(User model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (_membershipService.ValidateUser(model.UserName, model.Password))
                 {
-                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
+//                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
 
                     var user = _membershipService.GetUser(model.UserName, userIsOnline: true);
                     model.Email = user.Email;
+                    model.UserName = user.UserName;
+
+                    LoggedInUser = model;
 
                     if (Url.IsLocalUrl(returnUrl))
                     {
@@ -135,7 +132,7 @@ namespace Boku.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult JsonRegister(RegisterModel model)
+        public ActionResult JsonRegister(User model)
         {
             if (ModelState.IsValid)
             {
@@ -164,32 +161,27 @@ namespace Boku.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(User model)
         {
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                _membershipService.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                _membershipService.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey:Guid.NewGuid(), status: out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    _formsAuthenticationService.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    //_formsAuthenticationService.SetAuthCookie(model.UserName, createPersistentCookie: false);
 
-                    var emailInMD5 = convertEmailtoMD5(model.Email);
-                    model.Image = new Uri(string.Format("{0}{1}?s={2}", ConfigurationManager.AppSettings["GravatarUrl"], emailInMD5, ConfigurationManager.AppSettings["GravatarImageSize"]));
-
-                    _documentSession.Store(model);
+                    //_documentSession.Store(model);
                     _documentSession.SaveChanges();
 
                     RedirectToAction("Post", "Accounts", model);
                     
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
+                
+                ModelState.AddModelError("", ErrorCodeToString(createStatus));
             }
 
             // If we got this far, something failed, redisplay form
@@ -307,21 +299,5 @@ namespace Boku.Web.Controllers
             }
         }
         #endregion
-
-        private string convertEmailtoMD5(string email)
-        {
-            // step 1, calculate MD5 hash from input
-            var md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(email);
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-            var sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
     }
 }
