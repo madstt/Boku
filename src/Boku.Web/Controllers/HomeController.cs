@@ -14,7 +14,9 @@ namespace Boku.Web.Controllers
 
         public ActionResult Login(User loginModel)
         {
-            return View("Index", loginModel);
+            ViewBag.UserName = loginModel.UserName;
+            ViewBag.Email = loginModel.Email;
+            return View("Index");
         }
 
         public ActionResult About()

@@ -18,7 +18,6 @@ namespace Boku.DomainLogicLayer.AccountModels
         [Display(Name = "Password:")]
         public string Password { get; set; }
 
-        [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email adresse:")]
         public string Email { get; set; }

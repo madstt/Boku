@@ -83,7 +83,7 @@ namespace Boku.Web.Controllers
             {
                 if (_membershipService.ValidateUser(model.UserName, model.Password))
                 {
-//                    _formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
+                    _formsAuthenticationService.SetAuthCookie(model.UserName, false);
 
                     var user = _membershipService.GetUser(model.UserName, userIsOnline: true);
                     model.Email = user.Email;
